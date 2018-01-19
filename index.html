@@ -48,6 +48,47 @@
         </div>
       </div>
 
+      <div class="container-fluid">
+        <div class="row">
+          <div ng-controller="BRAutogenerateController" class="col-md-12">
+            <div class="panel panel-default" ng-show="br.active">
+              <div class="panel-heading">Importar masivamente Transferencias a realizar</div>
+              <pre>
+              Estructura del archivo
+
+              Importe,Es Santander,CBU,CUIT,Tipo Cuenta,Sucursal,Numero de Cuenta,Concepto
+
+              Importe: Decimales separados por punto.
+              Es Santander: SI para cuentas santander. NO para otros bancos.
+              CBU: opcional, solo para otros bancos.
+              CUIT: opcional, solo para otros bancos.
+              Tipo de Cuenta: el tipo de cuenta.
+                  -> Código de 2 números para cuentas Santander
+                  "00": "Cuenta Corriente en Pesos"
+                  "01": "Caja de Ahorro en Pesos"
+                  "03": "Cuenta Corriente en Dolares"
+                  "04": "Caja de Ahorro en Dolares"
+                  "09": "Cuenta Unica en Pesos"
+                  "10": "Cuenta Unica en Dolares"
+                  -> Código de 1 número para otros bancos
+                  "1": "Cuenta Corriente Propia"
+                  "2": "Cuenta Corriente de Terceros"
+                  "3": "Otra Cuenta"
+                  "4": "Otra Cuenta de Terceros"
+              Sucursal: opcional, solo para cuentas Santander.
+              Número de Cuenta: opcional, solo para cuentas Santander.
+              Concepto: concepto de la transferencia, codigo de 3 letras en mayuscula.
+
+              Nota: Incluir cabecera en el archivo.
+              </pre>
+              <div class="panel-body">
+                <input type="file" file-reader="fileContent"/>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div class="row">
         <div ng-controller="BRSantanderOtrasCuentasController" class="col-md-6">
           <div class="panel panel-default">
@@ -207,6 +248,19 @@
 
                 <pre>{{br.dump()}}</pre>
               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div ng-controller="BRAutogenerateController" class="col-md-12">
+          <div class="panel panel-default" ng-show="br.active">
+            <div class="panel-heading">Generar archivo de Transferencia</div>
+            <div class="panel-body">
+              <input class="btn btn-primary" type="button" ng-click="exportFile()" value="Generar Archivo" />
             </div>
           </div>
         </div>
